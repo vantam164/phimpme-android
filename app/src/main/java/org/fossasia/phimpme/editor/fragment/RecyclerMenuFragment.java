@@ -24,13 +24,16 @@ import org.fossasia.phimpme.MyApplication;
 import org.fossasia.phimpme.R;
 import org.fossasia.phimpme.editor.EditImageActivity;
 import org.fossasia.phimpme.editor.filter.PhotoProcessing;
+import org.fossasia.phimpme.editor.coloring.ColoringProcessing;
 import org.fossasia.phimpme.editor.view.StickerView;
+import org.fossasia.phimpme.opencamera.Camera.CameraActivity;
 
 public class RecyclerMenuFragment extends BaseEditFragment {
 
   private RecyclerView recyclerView;
   int MODE;
   private static ArrayList<Bitmap> filterThumbs;
+  private static ArrayList<Bitmap> coloringImages;
   View fragmentView;
   private StickerView mStickerView;
   static final String[] stickerPath = {
@@ -127,6 +130,7 @@ public class RecyclerMenuFragment extends BaseEditFragment {
   public void onDestroy() {
     super.onDestroy();
     if (filterThumbs != null) filterThumbs = null;
+    if (coloringImages != null) coloringImages = null;
     MyApplication.getRefWatcher(getActivity()).watch(this);
   }
 
@@ -136,6 +140,10 @@ public class RecyclerMenuFragment extends BaseEditFragment {
       if (this.currentBitmap != activity.mainBitmap) filterThumbs = null;
       this.currentBitmap = activity.mainBitmap;
       getFilterThumbs();
+    }else if (MODE == EditImageActivity.MODE_COLORING) {
+      if (this.currentBitmap != activity.mainBitmap) coloringImages = null;
+      this.currentBitmap = activity.mainBitmap;
+      getColoringThumbs();
     }
   }
 
@@ -143,6 +151,13 @@ public class RecyclerMenuFragment extends BaseEditFragment {
     if (null != currentBitmap) {
       GetFilterThumbsTask getFilterThumbsTask = new GetFilterThumbsTask();
       getFilterThumbsTask.execute();
+    }
+  }
+
+  public void getColoringThumbs() {
+    if (null != currentBitmap) {
+      GetColoringImageTask getColoringTask = new GetColoringImageTask();
+      getColoringTask.execute();
     }
   }
 
@@ -185,6 +200,33 @@ public class RecyclerMenuFragment extends BaseEditFragment {
     }
   }
 
+  private class GetColoringImageTask extends AsyncTask<Void, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Void... params) {
+      if (coloringImages == null) {
+        coloringImages = new ArrayList<>();
+          int leng = (titlelist != null) ? titlelist.length() : 0;
+          for (int i = 0; i < leng; i++) {
+              if (coloringImages != null) {
+                  Bitmap coloredImage = ColoringProcessing.blackwhite2color(getResizedBitmap(currentBitmap, 5), getContext(), 5);
+                  if (coloredImage != null) {
+                    coloringImages.add(coloredImage);
+                  }
+              }
+          }
+      }
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void bitmaps) {
+      super.onPostExecute(bitmaps);
+      if (coloringImages == null) return;
+      recyclerView.getAdapter().notifyDataSetChanged();
+    }
+  }
+
   class mRecyclerAdapter extends RecyclerView.Adapter<mRecyclerAdapter.mViewHolder> {
 
     class mViewHolder extends RecyclerView.ViewHolder {
@@ -205,6 +247,9 @@ public class RecyclerMenuFragment extends BaseEditFragment {
     mRecyclerAdapter() {
       defaulticon = R.drawable.ic_photo_filter;
       switch (MODE) {
+        case EditImageActivity.MODE_COLORING:
+          titlelist = getActivity().getResources().obtainTypedArray(R.array.coloring_titles);
+          break;
         case EditImageActivity.MODE_FILTERS:
           titlelist = getActivity().getResources().obtainTypedArray(R.array.filter_titles);
           break;
@@ -250,6 +295,13 @@ public class RecyclerMenuFragment extends BaseEditFragment {
           holder.icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
           holder.icon.setImageBitmap(filterThumbs.get(position));
         } else {
+          holder.icon.setImageResource(defaulticon);
+        }
+      }else if (MODE == EditImageActivity.MODE_COLORING){
+        if (currentBitmap != null && coloringImages != null && coloringImages.size() > position) {
+          holder.icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+          holder.icon.setImageBitmap(coloringImages.get(position));
+        }else {
           holder.icon.setImageResource(defaulticon);
         }
       } else {
@@ -309,18 +361,21 @@ public class RecyclerMenuFragment extends BaseEditFragment {
 
     void itemClicked(int pos, View view) {
       switch (MODE) {
+        case EditImageActivity.MODE_COLORING:
+          activity.setEffectType(pos, MODE);
+          activity.changeMode(EditImageActivity.MODE_SLIDER);
+          activity.changeBottomFragment(EditImageActivity.MODE_SLIDER);
+          break;
         case EditImageActivity.MODE_FILTERS:
           activity.setEffectType(pos, MODE);
           activity.changeMode(EditImageActivity.MODE_SLIDER);
           activity.changeBottomFragment(EditImageActivity.MODE_SLIDER);
           break;
-
         case EditImageActivity.MODE_ENHANCE:
           activity.setEffectType(pos, MODE);
           activity.changeMode(EditImageActivity.MODE_SLIDER);
           activity.changeBottomFragment(EditImageActivity.MODE_SLIDER);
           break;
-
         case EditImageActivity.MODE_STICKER_TYPES:
           String data = (String) view.getTag();
           activity.setStickerType(data);

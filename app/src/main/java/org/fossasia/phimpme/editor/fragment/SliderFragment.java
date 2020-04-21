@@ -16,6 +16,7 @@ import android.widget.SeekBar;
 import org.fossasia.phimpme.MyApplication;
 import org.fossasia.phimpme.R;
 import org.fossasia.phimpme.editor.EditImageActivity;
+import org.fossasia.phimpme.editor.coloring.ColoringProcessing;
 import org.fossasia.phimpme.editor.filter.PhotoProcessing;
 import org.fossasia.phimpme.editor.view.imagezoom.ImageViewTouchBase;
 
@@ -75,6 +76,8 @@ public class SliderFragment extends BaseEditFragment
   private void setDefaultSeekBarProgress() {
     if (null != seekBar) {
       switch (EditImageActivity.effectType / 100) {
+        case EditImageActivity.MODE_COLORING:
+          seekBar.setProgress(100);
         case EditImageActivity.MODE_FILTERS:
           if (SeekBarProgress > 0) {
             seekBar.setProgress(SeekBarProgress);
@@ -189,7 +192,13 @@ public class SliderFragment extends BaseEditFragment
         if (EditImageActivity.effectType / 100 == EditImageActivity.MODE_FILTERS) {
           activity.filterFragment.getFilterThumbs();
         }
+        if (EditImageActivity.effectType / 100 == EditImageActivity.MODE_COLORING) {
+          activity.coloringFragment.getColoringThumbs();
+        }
         switch (activity.mode) {
+          case EditImageActivity.MODE_COLORING:
+            activity.coloringFragment.clearCurrentSelection();
+            break;
           case EditImageActivity.MODE_FILTERS:
             activity.filterFragment.clearCurrentSelection();
             break;
@@ -216,7 +225,9 @@ public class SliderFragment extends BaseEditFragment
         case EditImageActivity.MODE_FILTERS:
           activity.filterFragment.clearCurrentSelection();
           break;
-
+        case EditImageActivity.MODE_COLORING:
+          activity.coloringFragment.clearCurrentSelection();
+          break;
         case EditImageActivity.MODE_ENHANCE:
           activity.enhanceFragment.clearCurrentSelection();
           break;
@@ -260,7 +271,16 @@ public class SliderFragment extends BaseEditFragment
       }
       if (currentBitmap != null) {
         srcBitmap = Bitmap.createBitmap(currentBitmap.copy(Bitmap.Config.RGB_565, true));
-        return PhotoProcessing.processImage(srcBitmap, EditImageActivity.effectType, val);
+        Log.d(TAG, "activity.mode: " + activity.mode);
+        switch (EditImageActivity.effectType / 100) {
+          case EditImageActivity.MODE_COLORING:
+            Bitmap bmp = ColoringProcessing.blackwhite2color(srcBitmap, getContext(), val / 10);
+            Log.d(TAG, "MODE_COLORING" + bmp);
+            return bmp;
+          default:
+            Log.d(TAG, "PhotoProcessing.processImage");
+            return PhotoProcessing.processImage(srcBitmap, EditImageActivity.effectType, val);
+        }
       }
       return null;
     }

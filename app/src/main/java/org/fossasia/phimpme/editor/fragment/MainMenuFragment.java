@@ -13,7 +13,7 @@ import org.fossasia.phimpme.editor.EditImageActivity;
 
 public class MainMenuFragment extends BaseEditFragment implements View.OnClickListener {
 
-  private View menu_filter, menu_enhance, menu_adjust, menu_stickers, menu_write, menu_frame;
+  private View menu_coloring, menu_filter, menu_enhance, menu_adjust, menu_stickers, menu_write, menu_frame;
   Context context;
 
   public MainMenuFragment() {}
@@ -33,12 +33,14 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_editor_main, container, false);
     context = getActivity();
+    menu_coloring = view.findViewById(R.id.menu_coloring);
     menu_filter = view.findViewById(R.id.menu_filter);
     menu_enhance = view.findViewById(R.id.menu_enhance);
     menu_adjust = view.findViewById(R.id.menu_adjust);
     menu_stickers = view.findViewById(R.id.menu_sticker);
     menu_write = view.findViewById(R.id.menu_write);
     menu_frame = view.findViewById(R.id.menu_frame);
+    menu_coloring.setOnClickListener(this);
     menu_filter.setOnClickListener(this);
     menu_enhance.setOnClickListener(this);
     menu_adjust.setOnClickListener(this);
@@ -71,6 +73,11 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
   @Override
   public void onClick(View v) {
     switch (v.getId()) {
+      case R.id.menu_coloring:
+        activity.changeMode(EditImageActivity.MODE_COLORING);
+        activity.sliderFragment.resetBitmaps();
+        activity.changeMiddleFragment(EditImageActivity.MODE_COLORING);
+        break;
       case R.id.menu_filter:
         activity.changeMode(EditImageActivity.MODE_FILTERS);
         activity.sliderFragment.resetBitmaps();
@@ -101,6 +108,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
   }
 
   public void highLightSelectedOption(int mode) {
+    menu_coloring.setBackgroundColor(Color.TRANSPARENT);
     menu_filter.setBackgroundColor(Color.TRANSPARENT);
     menu_enhance.setBackgroundColor(Color.TRANSPARENT);
     menu_adjust.setBackgroundColor(Color.TRANSPARENT);
@@ -109,6 +117,9 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     menu_frame.setBackgroundColor(Color.TRANSPARENT);
     int color = ContextCompat.getColor(context, R.color.md_grey_200);
     switch (mode) {
+      case 21:
+        menu_coloring.setBackgroundColor(color);
+        break;
       case 2:
         menu_filter.setBackgroundColor(color);
         break;

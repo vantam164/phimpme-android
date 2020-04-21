@@ -2,6 +2,7 @@ package org.fossasia.phimpme;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
 import androidx.multidex.MultiDex;
@@ -16,6 +17,7 @@ import io.realm.RealmConfiguration;
 import org.fossasia.phimpme.gallery.data.Album;
 import org.fossasia.phimpme.gallery.data.HandlingAlbums;
 import org.fossasia.phimpme.utilities.Constants;
+import org.pytorch.Module;
 
 /** Created by dnld on 28/04/16. */
 public class MyApplication extends Application {
@@ -23,7 +25,7 @@ public class MyApplication extends Application {
   private HandlingAlbums albums = null;
   public static Context applicationContext;
   private RefWatcher refWatcher;
-
+  private Module colorModel;
   public Album getAlbum() {
     return albums.dispAlbums.size() > 0 ? albums.getCurrentAlbum() : Album.getEmptyAlbum();
   }
@@ -39,6 +41,7 @@ public class MyApplication extends Application {
       // You should not init your app in this process.
       return;
     }
+    colorModel = Module.load(Environment.getExternalStorageDirectory().getAbsolutePath() + "/model/model.pt");
     refWatcher = LeakCanary.install(this);
     albums = new HandlingAlbums(getApplicationContext());
     applicationContext = getApplicationContext();
@@ -73,6 +76,11 @@ public class MyApplication extends Application {
   public static RefWatcher getRefWatcher(Context context) {
     MyApplication myApplication = (MyApplication) context.getApplicationContext();
     return myApplication.refWatcher;
+  }
+
+  public static Module getColorModel(Context context){
+    MyApplication myApplication = (MyApplication) context.getApplicationContext();
+    return myApplication.colorModel;
   }
 
   @Override

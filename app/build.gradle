@@ -236,6 +236,10 @@ dependencies {
     //compressor
     implementation 'id.zelory:compressor:2.1.0'
 
+    //pytorch
+    implementation 'org.pytorch:pytorch_android:1.4.0'
+    implementation 'org.pytorch:pytorch_android_torchvision:1.4.0'
+
 }
 
 apply plugin: 'com.android.application'

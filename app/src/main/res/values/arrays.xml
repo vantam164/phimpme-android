@@ -691,6 +691,10 @@
         <item>Navajo Enhance</item>
     </string-array>
 
+    <string-array name="coloring_titles">
+        <item>BlackWhite to Color</item>
+    </string-array>
+
     <integer-array name="enhance_icons">
         <item>@drawable/ic_bright</item>
         <item>@drawable/ic_contrast</item>

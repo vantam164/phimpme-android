@@ -66,6 +66,7 @@ public class EditImageActivity extends EditBaseActivity
   public static final int MODE_MAIN = 0;
 
   public static final int MODE_SLIDER = 1;
+  public static final int MODE_COLORING = 21;
   public static final int MODE_FILTERS = 2;
   public static final int MODE_ENHANCE = 3;
   public static final int MODE_ADJUST = 4;
@@ -157,7 +158,7 @@ public class EditImageActivity extends EditBaseActivity
 
   public ArrayList<Bitmap> bitmapsForUndo;
   public MainMenuFragment mainMenuFragment = new MainMenuFragment();
-  public RecyclerMenuFragment filterFragment, enhanceFragment, stickerTypesFragment;
+  public RecyclerMenuFragment coloringFragment, filterFragment, enhanceFragment, stickerTypesFragment;
   public StickersFragment stickersFragment;
   public SliderFragment sliderFragment;
   public TwoItemFragment writeFragment, adjustFragment;
@@ -266,6 +267,7 @@ public class EditImageActivity extends EditBaseActivity
 
     mainMenuFragment = MainMenuFragment.newInstance();
     sliderFragment = SliderFragment.newInstance();
+    coloringFragment = RecyclerMenuFragment.newInstance(MODE_COLORING);
     filterFragment = RecyclerMenuFragment.newInstance(MODE_FILTERS);
     enhanceFragment = RecyclerMenuFragment.newInstance(MODE_ENHANCE);
     stickerTypesFragment = RecyclerMenuFragment.newInstance(MODE_STICKER_TYPES);
@@ -293,6 +295,7 @@ public class EditImageActivity extends EditBaseActivity
 
   private void highLightSelectedOption(int mode) {
     switch (mode) {
+      case MODE_COLORING:
       case MODE_FILTERS:
       case MODE_ENHANCE:
       case MODE_ADJUST:
@@ -323,6 +326,8 @@ public class EditImageActivity extends EditBaseActivity
       case MODE_SLIDER:
         sliderFragment = SliderFragment.newInstance();
         return sliderFragment;
+      case MODE_COLORING:
+        return coloringFragment;
       case MODE_FILTERS:
         return filterFragment;
       case MODE_ENHANCE:
