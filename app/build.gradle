@@ -73,6 +73,8 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
+            shrinkResources true
+
             if (LOCAL_KEY_PRESENT || TRAVIS_BUILD)
                 signingConfig signingConfigs.release
         }
@@ -239,6 +241,9 @@ dependencies {
     //pytorch
     implementation 'org.pytorch:pytorch_android:1.4.0'
     implementation 'org.pytorch:pytorch_android_torchvision:1.4.0'
+    implementation project(path: ':market_licensing')
+    implementation project(path: ':downloader_library')
+    implementation project(path: ':zip_file')
 
 }
 

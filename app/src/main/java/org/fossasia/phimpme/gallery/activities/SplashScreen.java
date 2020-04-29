@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import java.io.IOException;
 import org.fossasia.phimpme.R;
+import org.fossasia.phimpme.SampleDownloaderActivity;
 import org.fossasia.phimpme.base.SharedMediaActivity;
 import org.fossasia.phimpme.gallery.data.Album;
 import org.fossasia.phimpme.gallery.util.ColorPalette;
@@ -227,10 +228,11 @@ public class SplashScreen extends SharedMediaActivity {
     }
 
     @Override
+
     protected void onPostExecute(Boolean result) {
       super.onPostExecute(result);
-
-      nextIntent = new Intent(SplashScreen.this, LFMainActivity.class);
+      nextIntent = new Intent(SplashScreen.this, SampleDownloaderActivity.class);
+//      nextIntent = new Intent(SplashScreen.this, LFMainActivity.class);
       Bundle b = new Bundle();
       b.putInt(CONTENT, result ? ALBUMS_PREFETCHED : ALBUMS_BACKUP);
       b.putBoolean(PICK_MODE, PICK_INTENT);
@@ -258,7 +260,8 @@ public class SplashScreen extends SharedMediaActivity {
     @Override
     protected void onPostExecute(Void result) {
       super.onPostExecute(result);
-      nextIntent = new Intent(SplashScreen.this, LFMainActivity.class);
+//      nextIntent = new Intent(SplashScreen.this, LFMainActivity.class);
+      nextIntent = new Intent(SplashScreen.this, SampleDownloaderActivity.class);
       Bundle b = new Bundle();
       getAlbums().addAlbum(0, album);
       b.putInt(CONTENT, PHOTOS_PREFETCHED);

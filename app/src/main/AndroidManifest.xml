@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.fossasia.phimpme">
 
+
+    <!-- Required to access Google Play Licensing -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <!-- Required to keep CPU alive while downloading files
+        (NOT to keep screen awake) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.READ_SMS"
@@ -46,6 +54,10 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service android:name=".SampleDownloaderService" />
+        <receiver android:name=".SampleAlarmReceiver" />
+
         <activity
             android:name=".share.twitter.LoginActivity"
             android:screenOrientation="portrait">
@@ -60,7 +72,9 @@
                     android:scheme="phimp.me" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".SampleDownloaderActivity">
+        </activity>
         <activity
             android:name=".opencamera.Camera.CameraActivity"
             android:parentActivityName=".gallery.activities.LFMainActivity"

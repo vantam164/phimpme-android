@@ -83,7 +83,7 @@ public class ColoringProcessing {
     }
 
     public static Bitmap blackwhite2color(Bitmap bitmap, Context context, int ratio_level) {
-        int [] valid_ratios = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+        int [] valid_ratios = {4, 6, 8, 10, 12, 14, 16, 18, 20, 32};
         if (ratio_level < 0) {
             ratio_level = 0;
         }
