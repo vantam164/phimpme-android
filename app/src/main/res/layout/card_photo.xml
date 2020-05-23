@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.fossasia.phimpme.gallery.views.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.darknight.photofun.gallery.views.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/media_card_layout"
@@ -37,4 +37,4 @@
         app:iiv_icon="gmd-play-circle-filled"
         tools:targetApi="lollipop" />
 
-</org.fossasia.phimpme.gallery.views.SquareRelativeLayout>
+</org.darknight.photofun.gallery.views.SquareRelativeLayout>

@@ -77,7 +77,7 @@
         android:layout_alignParentTop="true"
         android:background="#000000">
 
-        <org.fossasia.phimpme.editor.view.imagezoom.ImageViewTouch
+        <org.darknight.photofun.editor.view.imagezoom.ImageViewTouch
             android:id="@+id/main_image"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

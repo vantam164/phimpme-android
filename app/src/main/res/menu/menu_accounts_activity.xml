@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.fossasia.phimpme.accounts.AccountAct">
+    tools:context="org.darknight.photofun.accounts.AccountAct">
 
     <item
         android:id="@+id/action_account_settings"

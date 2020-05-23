@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.fossasia.phimpme">
+    package="org.darknight.photofun">
 
 
     <!-- Required to access Google Play Licensing -->
@@ -47,7 +47,7 @@
     <uses-feature android:name="android.hardware.microphone" />
 
     <application
-        android:name=".MyApplication"
+        android:name="org.darknight.photofun.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -55,11 +55,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".SampleDownloaderService" />
-        <receiver android:name=".SampleAlarmReceiver" />
+        <service android:name="org.darknight.photofun.SampleDownloaderService" />
+        <receiver android:name="org.darknight.photofun.SampleAlarmReceiver" />
 
         <activity
-            android:name=".share.twitter.LoginActivity"
+            android:name="org.darknight.photofun.share.twitter.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -73,7 +73,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SampleDownloaderActivity">
+            android:name="org.darknight.photofun.SampleDownloaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,8 +81,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".opencamera.Camera.CameraActivity"
-            android:parentActivityName=".gallery.activities.LFMainActivity"
+            android:name="org.darknight.photofun.opencamera.Camera.CameraActivity"
+            android:parentActivityName="org.darknight.photofun.gallery.activities.LFMainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -110,7 +110,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".opencamera.Camera.TakePhoto"
+            android:name="org.darknight.photofun.opencamera.Camera.TakePhoto"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:excludeFromRecents="true"
             android:icon="@drawable/ic_launcher_take_photo"
@@ -119,7 +119,7 @@
             android:taskAffinity="" />
         <!-- should not change the android:name, including moving to a subpackage - see http://android-developers.blogspot.co.uk/2011/06/things-that-cannot-change.html -->
         <receiver
-            android:name=".opencamera.Camera.MyWidgetProvider"
+            android:name="org.darknight.photofun.opencamera.Camera.MyWidgetProvider"
             android:icon="@drawable/ic_launcher_vector"
             android:label="@string/app_name">
             <intent-filter>
@@ -136,7 +136,7 @@
         </receiver>
         <!-- should not change the android:name, including moving to a subpackage - see http://android-developers.blogspot.co.uk/2011/06/things-that-cannot-change.html -->
         <receiver
-            android:name=".opencamera.Camera.MyWidgetProviderTakePhoto"
+            android:name="org.darknight.photofun.opencamera.Camera.MyWidgetProviderTakePhoto"
             android:icon="@drawable/ic_launcher_take_photo"
             android:label="@string/take_photo">
             <intent-filter>
@@ -149,7 +149,7 @@
         </receiver>
         <!-- should not change the android:name, including moving to a subpackage - see http://android-developers.blogspot.co.uk/2011/06/things-that-cannot-change.html -->
         <service
-            android:name=".opencamera.Camera.MyTileService"
+            android:name="org.darknight.photofun.opencamera.Camera.MyTileService"
             android:icon="@drawable/ic_photo_camera_white_48dp"
             android:label="@string/camera"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -159,7 +159,7 @@
         </service>
         <!-- should not change the android:name, including moving to a subpackage - see http://android-developers.blogspot.co.uk/2011/06/things-that-cannot-change.html -->
         <service
-            android:name=".opencamera.Camera.MyTileServiceVideo"
+            android:name="org.darknight.photofun.opencamera.Camera.MyTileServiceVideo"
             android:icon="@drawable/ic_videocam_white_48dp"
             android:label="@string/record_video"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -169,7 +169,7 @@
         </service>
         <!-- should not change the android:name, including moving to a subpackage - see http://android-developers.blogspot.co.uk/2011/06/things-that-cannot-change.html -->
         <service
-            android:name=".opencamera.Camera.MyTileServiceFrontCamera"
+            android:name="org.darknight.photofun.opencamera.Camera.MyTileServiceFrontCamera"
             android:icon="@drawable/ic_face_white_48dp"
             android:label="@string/selfie"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -179,7 +179,7 @@
         </service>
 
         <activity
-            android:name=".gallery.activities.SplashScreen"
+            android:name="org.darknight.photofun.gallery.activities.SplashScreen"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -211,7 +211,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".gallery.activities.LFMainActivity"
+            android:name="org.darknight.photofun.gallery.activities.LFMainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustPan">
@@ -222,11 +222,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gallery.activities.SingleMediaActivity"
+            android:name="org.darknight.photofun.gallery.activities.SingleMediaActivity"
             android:configChanges="orientation|screenSize|uiMode|touchscreen|screenLayout"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".gallery.activities.LFMainActivity"
+            android:parentActivityName="org.darknight.photofun.gallery.activities.LFMainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -236,7 +236,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.fossasia.phimpme.gallery.activities.LFMainActivity" />
+                android:value="org.darknight.photofun.gallery.activities.LFMainActivity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.albumPhoto" />
@@ -267,7 +267,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gallery.activities.SettingsActivity"
+            android:name="org.darknight.photofun.gallery.activities.SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustNothing"
             android:label="@string/settings"
@@ -285,14 +285,14 @@
         </activity>
 
         <activity
-            android:name=".gallery.activities.AboutActivity"
+            android:name="org.darknight.photofun.gallery.activities.AboutActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/about"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
 
         <activity
-            android:name=".gallery.activities.ExcludedAlbumsActivity"
+            android:name="org.darknight.photofun.gallery.activities.ExcludedAlbumsActivity"
             android:label="@string/excluded_albums"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -302,7 +302,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".editor.EditImageActivity"
+            android:name="org.darknight.photofun.editor.EditImageActivity"
             android:theme="@style/AppTheme.NoActionBar"
 
             android:windowSoftInputMode="adjustPan"
@@ -313,16 +313,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".opencamera.Camera.PhotoActivity"
+            android:name="org.darknight.photofun.opencamera.Camera.PhotoActivity"
             android:label="Preview"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".uploadhistory.UploadHistory"
+            android:name="org.darknight.photofun.uploadhistory.UploadHistory"
             android:label="Upload History"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
-            android:name="org.fossasia.phimpme.gallery.CustomGlideModule"
+            android:name="org.darknight.photofun.gallery.CustomGlideModule"
             android:value="GlideModule" />
 
         <provider
@@ -336,14 +336,14 @@
         </provider>
 
         <activity
-            android:name=".share.SharingActivity"
+            android:name="org.darknight.photofun.share.SharingActivity"
             android:largeHeap="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
 
         <activity
-            android:name=".accounts.AccountActivity"
+            android:name="org.darknight.photofun.accounts.AccountActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -357,16 +357,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".share.drupal.DrupalLogin"
+            android:name="org.darknight.photofun.share.drupal.DrupalLogin"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".share.wordpress.WordpressLoginActivity"
+            android:name="org.darknight.photofun.share.wordpress.WordpressLoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".share.nextcloud.NextCloudAuth"
+            android:name="org.darknight.photofun.share.nextcloud.NextCloudAuth"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".share.flickr.FlickrActivity"
+            android:name="org.darknight.photofun.share.flickr.FlickrActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -380,7 +380,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".share.imgur.ImgurAuthActivity"
+            android:name="org.darknight.photofun.share.imgur.ImgurAuthActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.dropbox.core.android.AuthActivity"
@@ -398,7 +398,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".share.owncloud.OwnCloudActivity"
+            android:name="org.darknight.photofun.share.owncloud.OwnCloudActivity"
             android:label="@string/title_activity_own_cloud"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -406,8 +406,8 @@
             android:name="io.fabric.ApiKey"
             android:value="78c6ec5c18fcd10ffbfd28ae038f3311f2763889" />
 
-        <activity android:name=".editor.CompressImageActivity"></activity>
-        <activity android:name=".trashbin.TrashBinActivity"></activity>
+        <activity android:name="org.darknight.photofun.editor.CompressImageActivity"></activity>
+        <activity android:name="org.darknight.photofun.trashbin.TrashBinActivity"></activity>
     </application>
 
 </manifest>
