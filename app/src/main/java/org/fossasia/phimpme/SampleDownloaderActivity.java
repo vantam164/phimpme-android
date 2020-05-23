@@ -42,6 +42,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.fossasia.phimpme.gallery.activities.LFMainActivity;
+import org.fossasia.phimpme.gallery.activities.SplashScreen;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.zip.CRC32;
@@ -298,6 +301,8 @@ public class SampleDownloaderActivity extends Activity implements IDownloaderCli
                     mPauseButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            Intent nextIntent = new Intent(SampleDownloaderActivity.this, SplashScreen.class);
+                            startActivity(nextIntent);
                             finish();
                         }
                     });
@@ -309,6 +314,8 @@ public class SampleDownloaderActivity extends Activity implements IDownloaderCli
                     mPauseButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            Intent nextIntent = new Intent(SampleDownloaderActivity.this, SplashScreen.class);
+                            startActivity(nextIntent);
                             finish();
                         }
                     });

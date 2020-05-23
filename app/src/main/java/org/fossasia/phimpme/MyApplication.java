@@ -41,7 +41,7 @@ public class MyApplication extends Application {
       // You should not init your app in this process.
       return;
     }
-    colorModel = Module.load(Environment.getExternalStorageDirectory().getAbsolutePath() + "/model/model.pt");
+
     refWatcher = LeakCanary.install(this);
     albums = new HandlingAlbums(getApplicationContext());
     applicationContext = getApplicationContext();
@@ -81,6 +81,12 @@ public class MyApplication extends Application {
   public static Module getColorModel(Context context){
     MyApplication myApplication = (MyApplication) context.getApplicationContext();
     return myApplication.colorModel;
+  }
+
+  public static void loadColorModel(Context context){
+    MyApplication myApplication = (MyApplication) context.getApplicationContext();
+    String modelPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/model/model.pt";
+    myApplication.colorModel = Module.load(modelPath);
   }
 
   @Override
