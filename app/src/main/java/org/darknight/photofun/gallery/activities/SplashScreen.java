@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import java.io.IOException;
+
+import org.darknight.photofun.MyApplication;
 import org.darknight.photofun.R;
 import org.darknight.photofun.base.SharedMediaActivity;
 import org.darknight.photofun.gallery.data.Album;
@@ -130,6 +132,7 @@ public class SplashScreen extends SharedMediaActivity {
     if (requestCode == PICK_MEDIA_REQUEST) {
       if (resultCode == RESULT_OK) {
         setResult(RESULT_OK, data);
+        MyApplication.loadColorModel(getApplicationContext());
         finish();
       }
     } else if (requestCode == REQUEST_OPEN_APP_SETTINGS) {
@@ -169,10 +172,11 @@ public class SplashScreen extends SharedMediaActivity {
       case READ_EXTERNAL_STORAGE_ID:
         boolean granted =
             grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
-        if (granted)
+        if (granted) {
           new PrefetchAlbumsData()
-              .execute(SP.getBoolean(getString(R.string.preference_auto_update_media), false));
-        else {
+                  .execute(SP.getBoolean(getString(R.string.preference_auto_update_media), false));
+          MyApplication.loadColorModel(getApplicationContext());
+        }else {
           SnackBarHandler.create(parentView, R.string.storage_permission_denied).show();
           showPermissionAlertDialog();
         }

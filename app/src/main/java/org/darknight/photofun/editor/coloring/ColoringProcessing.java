@@ -13,6 +13,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.pytorch.IValue;
+import org.pytorch.Module;
 import org.pytorch.Tensor;
 import org.pytorch.torchvision.TensorImageUtils;
 
@@ -83,6 +84,10 @@ public class ColoringProcessing {
     }
 
     public static Bitmap blackwhite2color(Bitmap bitmap, Context context, int ratio_level) {
+        Module model = MyApplication.getColorModel((context.getApplicationContext()));
+        if (model == null) {
+            return null;
+        }
         int [] valid_ratios = {4, 6, 8, 10, 12, 14, 16, 18, 20, 32};
         if (ratio_level < 0) {
             ratio_level = 0;
@@ -98,7 +103,7 @@ public class ColoringProcessing {
         Bitmap bmp = ColoringProcessing.convertResize(input, new Size(target_size, target_size), true);
         Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bmp,
                 new float[]{0.4850f, 0.4560f, 0.4060f}, new float[]{0.2290f, 0.2240f, 0.2250f});
-        IValue rs = MyApplication.getColorModel((context.getApplicationContext())).forward(IValue.from(inputTensor));
+        IValue rs = model.forward(IValue.from(inputTensor));
         final Tensor ts = rs.toTensor();
         float[] pixels = ts.getDataAsFloatArray();
 

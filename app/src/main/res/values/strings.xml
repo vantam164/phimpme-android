@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PhotoED</string>
+    <string name="app_name">PhotoFun</string>
     <string name="title_gallery">Gallery</string>
     <string name="title_camera">Camera</string>
     <string name="title_account">Accounts</string>
@@ -417,7 +417,7 @@
     <string name="permission_rationale_storage">Storage read/write permission is required to save photos</string>
     <string name="permission_rationale_record_audio">Microphone permission is required to record video with audio</string>
     <string name="permission_rationale_location">Location permission is required for geotagging</string>
-    <string name="permission_storage_alert">Please allow read storage permission to use PhotoED features</string>
+    <string name="permission_storage_alert">Please allow read storage permission to use PhotoFun features</string>
 
     <string name="preference_category_photo_debugging">Debugging options</string>
     <string name="preference_category_video_debugging">Debugging options</string>
@@ -537,7 +537,7 @@
     <!-- ACTIONS -->
     <string name="sort">Sort</string>
     <string name="camera">Camera</string>
-    <string name="phimpme_camera">PhotoED Camera</string>
+    <string name="phimpme_camera">PhotoFun Camera</string>
     <string name="exclude">Exclude</string>
     <string name="cancel">Cancel</string>
     <string name="set">Set</string>

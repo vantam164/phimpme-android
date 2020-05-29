@@ -556,10 +556,23 @@ public class SampleDownloaderActivity extends Activity implements IDownloaderCli
 
         mPB.setIndeterminate(indeterminate);
         setButtonPausedState(paused);
+
+        if (newState == IDownloaderClient.STATE_FAILED_FETCHING_URL) {
+            Intent nextIntent = new Intent(SampleDownloaderActivity.this, SplashScreen.class);
+            nextIntent.setAction(Intent.ACTION_GET_CONTENT);
+            nextIntent.setAction(Intent.ACTION_PICK);
+            nextIntent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            nextIntent.addCategory(Intent.CATEGORY_OPENABLE);
+            nextIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            nextIntent.addCategory(Intent.CATEGORY_APP_GALLERY);
+
+            startActivity(nextIntent);
+            finish();
+        }
     }
 
     /**
-     * Sets the state of the various controls based on the progressinfo object
+     * Sets the state of the various controls based on the progressinfo objectD
      * sent from the downloader service.
      */
     @Override

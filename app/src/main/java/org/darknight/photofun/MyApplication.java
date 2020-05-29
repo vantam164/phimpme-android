@@ -19,13 +19,15 @@ import org.darknight.photofun.gallery.data.HandlingAlbums;
 import org.darknight.photofun.utilities.Constants;
 import org.pytorch.Module;
 
+import java.io.File;
+
 /** Created by dnld on 28/04/16. */
 public class MyApplication extends Application {
 
   private HandlingAlbums albums = null;
   public static Context applicationContext;
   private RefWatcher refWatcher;
-  private Module colorModel;
+  private Module colorModel = null;
   public Album getAlbum() {
     return albums.dispAlbums.size() > 0 ? albums.getCurrentAlbum() : Album.getEmptyAlbum();
   }
@@ -80,13 +82,24 @@ public class MyApplication extends Application {
 
   public static Module getColorModel(Context context){
     MyApplication myApplication = (MyApplication) context.getApplicationContext();
+    if (myApplication.colorModel == null) {
+      MyApplication.loadColorModel(context);
+    }
     return myApplication.colorModel;
   }
 
   public static void loadColorModel(Context context){
     MyApplication myApplication = (MyApplication) context.getApplicationContext();
-    String modelPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/model/model.pt";
-    myApplication.colorModel = Module.load(modelPath);
+    String modelPath = context.getApplicationContext().getObbDir() + "/main.2.org.darknight.photofun.obb\t";
+    File file = new File(modelPath);
+    if(!file.exists()) {
+      modelPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/model/model.pt";
+    }
+    file = new File(modelPath);
+    Log.d("TEST", " myApplication.colorModel: " +  myApplication.colorModel);
+    if(file.exists() && myApplication.colorModel == null) {
+      myApplication.colorModel = Module.load(modelPath);
+    }
   }
 
   @Override

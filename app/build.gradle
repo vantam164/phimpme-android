@@ -28,19 +28,27 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a','arm64-v8a','x86','x86_64'
+        }
+    }
+
     defaultConfig {
-        applicationId "org.fossasia.phimpme"
+        applicationId "org.darknight.photofun"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 13
-        versionName '1.10.0'
+        versionCode 1
+        versionName '1.0.0'
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         resConfigs "en"
-        ndk {
-            abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
-        }
+//        ndk {
+//            abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
+//        }
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
     }

@@ -9,7 +9,7 @@ using namespace std;
 using namespace cv;
 extern "C" {
     JNIEXPORT void JNICALL
-    Java_org_fossasia_phimpme_editor_filter_PhotoProcessing_nativeApplyFilter(JNIEnv *env,
+    Java_org_darknight_photofun_editor_filter_PhotoProcessing_nativeApplyFilter(JNIEnv *env,
                                                                                     jclass type,
                                                                                     jint mode,
                                                                                     jint val,
@@ -121,7 +121,7 @@ extern "C" {
 
 
     JNIEXPORT void JNICALL
-    Java_org_fossasia_phimpme_editor_filter_PhotoProcessing_nativeEnhanceImage(JNIEnv *env,
+    Java_org_darknight_photofun_editor_filter_PhotoProcessing_nativeEnhanceImage(JNIEnv *env,
                                                                                      jclass type,
                                                                                      jint mode,
                                                                                      jint val,
