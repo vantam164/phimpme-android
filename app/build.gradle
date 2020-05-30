@@ -40,7 +40,7 @@ android {
         applicationId "org.darknight.photofun"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
+        versionCode 5
         versionName '1.0.0'
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'

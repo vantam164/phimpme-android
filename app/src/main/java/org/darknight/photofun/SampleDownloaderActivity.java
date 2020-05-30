@@ -557,7 +557,10 @@ public class SampleDownloaderActivity extends Activity implements IDownloaderCli
         mPB.setIndeterminate(indeterminate);
         setButtonPausedState(paused);
 
-        if (newState == IDownloaderClient.STATE_FAILED_FETCHING_URL) {
+        if (newState == IDownloaderClient.STATE_FAILED_FETCHING_URL ||
+                newState == IDownloaderClient.STATE_FAILED_UNLICENSED ||
+                newState == IDownloaderClient.STATE_FAILED_CANCELED ||
+                newState ==  IDownloaderClient.STATE_FAILED) {
             Intent nextIntent = new Intent(SampleDownloaderActivity.this, SplashScreen.class);
             nextIntent.setAction(Intent.ACTION_GET_CONTENT);
             nextIntent.setAction(Intent.ACTION_PICK);

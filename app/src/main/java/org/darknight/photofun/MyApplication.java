@@ -90,8 +90,9 @@ public class MyApplication extends Application {
 
   public static void loadColorModel(Context context){
     MyApplication myApplication = (MyApplication) context.getApplicationContext();
-    String modelPath = context.getApplicationContext().getObbDir() + "/main.2.org.darknight.photofun.obb\t";
+    String modelPath = context.getApplicationContext().getObbDir() + "/main.2.org.darknight.photofun.obb";
     File file = new File(modelPath);
+    Log.d("TEST", " modelPath: " +  modelPath + file.exists());
     if(!file.exists()) {
       modelPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/model/model.pt";
     }
